@@ -14,15 +14,15 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
   command = [[%s/\s\+$//e]],
 })
 vim.g.markdown_fenced_languages = {
-  "ts=typescript"
+  "ts=typescript",
 }
 
 vim.opt.list = true
 vim.opt.listchars = {
-    tab = '▸ ',
-    trail = '·',
-    space = '·',
-    nbsp = '␣',
-    extends = '❯',
-    precedes = '❮'
+  tab = "▸ ",
+  trail = "·",
+  space = "·",
+  nbsp = "␣",
+  extends = "❯",
+  precedes = "❮",
 }
