@@ -144,6 +144,17 @@ local plugins = {
       "<C-Up>",
     },
   },
+
+  {
+    "EwenSellitto/epiheader.nvim",
+    opts = {},
+    ft = {
+      "c",
+      "cpp",
+      "haskell",
+      "python",
+    },
+  },
 }
 
 return plugins
