@@ -1,8 +1,9 @@
 local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 local null_ls = require "null-ls"
 
-local script_dir = vim.fn.stdpath "config"
-local clang_format_config = script_dir .. "/.clang_format"
+-- local script_dir = vim.fn.stdpath "config"
+-- local clang_format_config = script_dir .. "/.clang_format"
+local clang_format_config = "/home/ewensellitto/dotfiles/custom/.clang-format"
 
 local opts = {
   sources = {
@@ -12,7 +13,9 @@ local opts = {
       extra_args = { "--line-length=120" },
     },
     null_ls.builtins.formatting.prettier,
-    null_ls.builtins.formatting.stylua,
+    null_ls.builtins.formatting.stylua.with {
+      extra_args = { "--config-path=/home/ewensellitto/dotfiles/.config/nvim/.stylua.toml" },
+    },
     null_ls.builtins.formatting.clang_format.with {
       extra_args = { "-style=file:" .. clang_format_config },
     },
