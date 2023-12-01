@@ -1,9 +1,9 @@
 local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 local null_ls = require "null-ls"
 
--- local script_dir = vim.fn.stdpath "config"
--- local clang_format_config = script_dir .. "/.clang_format"
-local clang_format_config = "/home/ewensellitto/dotfiles/custom/.clang-format"
+local script_dir = vim.fn.stdpath "config"
+local clang_format_config = script_dir .. "/.clang_format"
+-- local clang_format_config = "/home/ewensellitto/dotfiles/custom/.clang-format"
 
 local opts = {
   sources = {
