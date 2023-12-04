@@ -13,9 +13,7 @@ local opts = {
       extra_args = { "--line-length=120" },
     },
     null_ls.builtins.formatting.prettier,
-    null_ls.builtins.formatting.stylua.with {
-      extra_args = { "--config-path=/home/ewensellitto/dotfiles/.config/nvim/.stylua.toml" },
-    },
+    null_ls.builtins.formatting.stylua,
     null_ls.builtins.formatting.clang_format.with {
       extra_args = { "-style=file:" .. clang_format_config },
     },
