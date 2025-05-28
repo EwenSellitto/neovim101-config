@@ -1,28 +1,38 @@
-vim.opt.number = true
-vim.opt.relativenumber = true
-vim.opt.colorcolumn = "80"
+vim.g.base46_cache = vim.fn.stdpath "data" .. "/nvchad/base46/"
+vim.g.mapleader = " "
 
--- Set tabs to be 4 spaces
-vim.opt.tabstop = 4
-vim.opt.shiftwidth = 4
-vim.opt.expandtab = true
+-- bootstrap lazy and all plugins
+local lazypath = vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
 
--- Set end of file linebreak
-vim.opt.eol = true
-vim.api.nvim_create_autocmd({ "BufWritePre" }, {
-  pattern = { "*" },
-  command = [[%s/\s\+$//e]],
-})
-vim.g.markdown_fenced_languages = {
-  "ts=typescript",
-}
+if not vim.uv.fs_stat(lazypath) then
+  local repo = "https://github.com/folke/lazy.nvim.git"
+  vim.fn.system { "git", "clone", "--filter=blob:none", repo, "--branch=stable", lazypath }
+end
 
-vim.opt.list = true
-vim.opt.listchars = {
-  tab = "▸ ",
-  trail = "·",
-  space = "·",
-  nbsp = "␣",
-  extends = "❯",
-  precedes = "❮",
-}
+vim.opt.rtp:prepend(lazypath)
+
+local lazy_config = require "configs.lazy"
+
+-- load plugins
+require("lazy").setup({
+  {
+    "NvChad/NvChad",
+    lazy = false,
+    branch = "v2.5",
+    import = "nvchad.plugins",
+  },
+
+  { import = "plugins" },
+}, lazy_config)
+
+-- load theme
+dofile(vim.g.base46_cache .. "defaults")
+dofile(vim.g.base46_cache .. "statusline")
+
+require "options"
+require "nvchad.autocmds"
+require "snippets"
+
+vim.schedule(function()
+  require "mappings"
+end)
